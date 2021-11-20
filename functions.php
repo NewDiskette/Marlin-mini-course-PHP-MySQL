@@ -23,10 +23,12 @@ function get_user_by_email($email) {
         redirect_to($path);
         include 'flash.php';
         $name = 'email is busy';
-        $message = '<div class="alert alert-danger text-dark" role="alert">
-        <strong>Уведомление!</strong> Этот эл. адрес уже занят другим пользователем.
-        </div>';
-        flash($name, $message, FLASH_INFO);die;
+        $message = '<strong>Уведомление!</strong> Этот эл. адрес уже занят другим пользователем.';
+        $type = 'danger text-dark" role="alert"';
+        $flash_message = $_SESSION[FLASH][$name];
+        create_flash_message($name, $message, $type);
+        format_flash_message($flash_message);
+        display_flash_message($name);
     }
 }
 

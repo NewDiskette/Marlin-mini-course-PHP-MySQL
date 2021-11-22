@@ -1,5 +1,6 @@
 <?php
 include 'path.php';
+include 'flash.php';
 
 /* 
         Parametrs:
@@ -21,14 +22,10 @@ function get_user_by_email($email) {
     if (in_array($arrayEmail, $arrayEmailDB)){
         $path = 'Location:' . $BASE_URL . 'page_register.php';
         redirect_to($path);
-        include 'flash.php';
+  
         $name = 'email is busy';
         $message = '<strong>Уведомление!</strong> Этот эл. адрес уже занят другим пользователем.';
-        $type = 'danger text-dark" role="alert"';
-        $flash_message = $_SESSION[FLASH][$name];
-        create_flash_message($name, $message, $type);
-        format_flash_message($flash_message);
-        display_flash_message($name);
+        flash($name, $message, FLASH_WARNING);die;
     }
 }
 
@@ -50,36 +47,11 @@ function add_user($email,$password) {
     $statement->execute();
     $path = 'Location:' . $BASE_URL . 'page_login.php';
     redirect_to($path);
-    include 'flash.php';
+
     $name = 'registered';
     $message = 'Регистрация успешна';
-    $type = 'success';
-    $flash_message = $_SESSION[FLASH][$name];
-    create_flash_message($name, $message, $type);
-    format_flash_message($flash_message);
-    display_flash_message($name);
+    flash($name, $message, FLASH_SUCCESS);
 }
-
-/* 
-        Parametrs:
-            string - $name (ключ)
-            string - $message (значение, текст сообщения)
-        
-        Description: подготовить флеш сообщение
-
-        Return value: null
-*/
-// function set_flash_message($name,$message) {}
-
-/* 
-        Parametrs:
-            string - $name (ключ)
-        
-        Description: вывести флеш сообщение
-
-        Return value: null
-*/
-// function display_flash_message($name) {}
 
 /* 
         Parametrs:
@@ -92,8 +64,3 @@ function add_user($email,$password) {
 function redirect_to($path) {
     header($path);
 }
-
-
-
-
-

@@ -3,9 +3,10 @@
 const FLASH = 'FLASH_MESSAGES';
 
 const FLASH_ERROR = 'error';
-const FLASH_WARNING = 'warning';
+// const FLASH_WARNING = 'warning';
 const FLASH_INFO = 'info';
 const FLASH_SUCCESS = 'success';
+const FLASH_WARNING = 'danger text-dark" role="alert"';
 
 /**
  * Create a flash message
